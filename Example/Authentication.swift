@@ -10,6 +10,7 @@ import Firebase
 import GoogleSignIn
 
 struct Authentication {
+    @MainActor
     func googleOauth() async throws {
         // google sign in
         guard let clientID = FirebaseApp.app()?.options.clientID else {
@@ -21,8 +22,8 @@ struct Authentication {
         GIDSignIn.sharedInstance.configuration = config
         
         //get rootView
-        let scene = await UIApplication.shared.connectedScenes.first as? UIWindowScene
-        guard let rootViewController = await scene?.windows.first?.rootViewController
+        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        guard let rootViewController = scene?.windows.first?.rootViewController
         else {
             fatalError("There is no root view controller!")
         }
@@ -33,7 +34,7 @@ struct Authentication {
         )
         let user = result.user
         guard let idToken = user.idToken?.tokenString else {
-            throw "Unexpected error occurred, please retry"
+            throw AuthenticationError.runtimeError("Unexpected error occurred, please retry")
         }
         
         //Firebase auth
@@ -49,5 +50,6 @@ struct Authentication {
     }
 }
 
-
-extension String: Error {}
+enum AuthenticationError: Error {
+    case runtimeError(String)
+}

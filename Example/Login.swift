@@ -16,8 +16,8 @@ struct Login: View {
             Task {
                 do {
                     try await Authentication().googleOauth()
-                } catch let e {
-                    err = e.localizedDescription
+                } catch AuthenticationError.runtimeError(let errorMessage) {
+                    err = errorMessage
                 }
             }
         }label: {
