@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseAuth
 
 struct Home: View {
     @State private var err : String = ""

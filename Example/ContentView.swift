@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseAuth
 
 struct ContentView: View {
     @State private var userLoggedIn = (Auth.auth().currentUser != nil)

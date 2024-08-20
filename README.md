@@ -47,7 +47,7 @@ In the `ExampleApp.swift` file we need to initialize Firebase and we have to h
 
 ```swift
 import SwiftUI
-import Firebase
+import FirebaseCore
 import GoogleSignIn
 
 @main
@@ -72,7 +72,7 @@ In the `ContentView.swift` file we need to check if the user is already logged
 
 ```swift
 import SwiftUI
-import Firebase
+import FirebaseAuth
 
 struct ContentView: View {
     @State private var userLoggedIn = (Auth.auth().currentUser != nil)
@@ -104,7 +104,8 @@ Let’s now build an Authentication class in `Authentication.swift`
 
 ```swift
 import Foundation
-import Firebase
+import FirebaseCore
+import FirebaseAuth
 import GoogleSignIn
 
 struct Authentication {
@@ -189,7 +190,7 @@ As well as a basic home page in `Home.swift`
 
 ```swift
 import SwiftUI
-import Firebase
+import FirebaseAuth
 
 struct Home: View {
     @State private var err : String = ""
